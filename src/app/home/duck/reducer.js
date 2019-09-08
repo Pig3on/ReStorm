@@ -29,12 +29,35 @@ export default (state = initialState, action) =>{
         case WEATHER_FAILED:
             return {
                 ...state,
-                data: null,
+                message:action.payload,
                 isDone:false,
                 isError:true,
-                isLoading:true ///todo CHANGE THIS, THIS IS BAD
+                isLoading:false,
+                data: null,
             }
         default:
             return state;
     }
 }
+
+export function getWeatherView(state){
+    const weather = state.home;
+
+    const mainWeather = weather.data !== null ? weather.data.weather[0] : null;
+    const weatherView = {
+        isLoading:weather.isLoading,
+        isLoaded:weather.isLoaded,
+        isError:weather.isError,
+        message: weather.message,
+        data:{
+            icon: mainWeather ? mainWeather.icon : '',
+            currentLocation: weather.data ? weather.data.name : '',
+            currentWeather: mainWeather ? mainWeather.main : '',
+            currentWeatherDescription:mainWeather ? mainWeather.description : '' ,
+            temperature: weather.data ? weather.data.main.temp : '',
+            pressure:weather.data ? weather.data.main.pressure : '',
+            humidity: weather.data ? weather.data.main.humidity : '',
+        }
+    };
+    return weatherView;
+  }

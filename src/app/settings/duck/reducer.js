@@ -1,4 +1,4 @@
-import { CHANGE_CURRENT_CITY } from "./actions";
+import { CHANGE_CURRENT_CITY, REFRESH_CITIES } from "./actions";
 
 
 const initialState = {
@@ -21,6 +21,11 @@ export default (state = initialState, action) =>{
                 ...state,
                 currentCity: action.payload,
             }
+        case REFRESH_CITIES:
+        return {
+            ...state,
+            cities: action.payload,
+        }
         default:
             return state;
     }

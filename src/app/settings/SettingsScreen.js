@@ -1,15 +1,45 @@
-import React from 'react';
-import {View,Text,TouchableOpacity,FlatList} from 'react-native';
+import React, {useState} from 'react';
+import {View,Text,TouchableOpacity,FlatList,Modal,TextInput} from 'react-native';
 import styles from './SettingsStyles';
 
 
 const renderSettingsItem = (item,changeCurrentCity) => {
 
-    return <TouchableOpacity onPress={()=>{changeCurrentCity(item.item)}} >
+    return <TouchableOpacity style={styles.listItemButton} onPress={()=>{changeCurrentCity(item.item)}} >
         <Text style={styles.listItemText}>{item.item.name}</Text>
     </TouchableOpacity>
 }
-const SettingsScreen = ({settings,goBack,changeCurrentCity}) => {
+
+const InsertCityModal = ({isModalVisible,requestCancel,requestConfirm}) =>{
+    const [value,setValue] = useState('');
+    return <Modal
+    animationType="slide"
+    transparent={false}
+    visible={isModalVisible}
+    onRequestClose={requestCancel}>
+    <View style={{marginTop: 22}}>
+      <View>
+        <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            onChangeText={text => setValue(text)}
+            value={value}
+            />
+        <TouchableOpacity
+          onPress={()=>{requestConfirm(value); setValue('')}}>
+          <Text>Add</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=>{requestCancel();setValue('')}}>
+          <Text>Cancel</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </Modal>
+}
+
+const SettingsScreen = ({settings,goBack,changeCurrentCity,addNewCity}) => {
+    const [isModalVisible,setModalVisible] = useState(false);
+
     return <View style={styles.mainBox}>
         <View>
             <Text style={styles.currentCityLabel}>Current City:</Text>
@@ -21,7 +51,19 @@ const SettingsScreen = ({settings,goBack,changeCurrentCity}) => {
             keyExtractor={(item,index) => {return index.toString()}}
             data={settings.cities} 
             renderItem={(item)=> renderSettingsItem(item,changeCurrentCity)} />
+
+        <TouchableOpacity style={styles.addCityButton} onPress={()=>{setModalVisible(true)}} >
+            <Text style={styles.listItemText}>Add new City</Text>
+        </TouchableOpacity>
+            <InsertCityModal
+             isModalVisible={isModalVisible}
+             requestCancel={()=>{setModalVisible(false)}}
+             requestConfirm={(value)=>{setModalVisible(false); addNewCity(value)}} />
     </View>
 }
+
+
+
+
 
 export default SettingsScreen;

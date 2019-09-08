@@ -9,22 +9,33 @@ const styles = StyleSheet.create({
     currentCityText:{
         color:'white',
         textAlign:'center',
-        fontSize:45
+        fontSize:35
     },
     currentCityLabel:{
-        fontSize:30,
+        fontSize:20,
         color:'white',
     },
     changeCityLabel:{
-        fontSize:30,
+        fontSize:20,
         color:'white',
+    },
+    addCityButton:{
+        margin:10,
+        borderWidth:1,
+        borderColor:'white',
+        borderRadius:5
     },
     list:{
         backgroundColor:'black'
     },
+    listItemButton:{
+        borderTopWidth:0.5,
+        borderBottomWidth:0.5,
+        borderColor:'white'
+    },
     listItemText:{
         textAlign:'center',
-        fontSize:40,
+        fontSize:25,
         color:'white',
     }
 })

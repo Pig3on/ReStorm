@@ -3,25 +3,32 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
     mainBox:{
-        flex:1,
+        flexGrow: 1,
         marginLeft:20,
         marginRight:20,
+    },
+    infoBox:{
+        flex:1,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
     },
     infoItem:{
-        marginBottom:30,
+        marginBottom:20,
         flexDirection:'row'
+    },
+    infoButton:{
+        marginBottom:20,
+        alignItems:'center',
     },
     label:{
         textAlign:'center',
-        fontSize:20,
+        fontSize:15,
         flex:0.4,
         textAlignVertical :'center'
     },
     title:{
         textAlign:'center',
-        fontSize:40,
+        fontSize:30,
         textAlignVertical :'center'
     },
     image:{
@@ -34,7 +41,7 @@ const styles = StyleSheet.create({
     },
     value:{
         textAlign:'center',
-        fontSize:35,
+        fontSize:20,
         flex:0.6,
         textAlignVertical :'center'
     },
