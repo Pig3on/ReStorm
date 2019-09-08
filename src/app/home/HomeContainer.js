@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import { compose } from 'redux';
 import { getWeatherAsyncAction } from './duck/actions';
 import { getWeatherView } from './duck/reducer';
-
+import SplashScreen from 'react-native-splash-screen'
 const HomeContainer = ({navigation,currentCity,getWeather,weather}) => {
     const navigateToSettings = () =>{
         navigation.navigate("Settings");
@@ -14,7 +14,8 @@ const HomeContainer = ({navigation,currentCity,getWeather,weather}) => {
       getWeather(currentCity);
     }
     useEffect(()=>{
-            getWeather(currentCity);
+        SplashScreen.hide();
+        getWeather(currentCity);
     },[currentCity]);
     return (
          <HomeScreen refreshWeather={refreshWeather} weather={weather} navigateToSettings={navigateToSettings}/>

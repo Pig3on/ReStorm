@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import {store,persistor} from './src/config/configureStore';
