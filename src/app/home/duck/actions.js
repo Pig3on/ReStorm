@@ -2,7 +2,8 @@ export const WEATHER_LOADING = 'WEATHER_LOADING';
 export const WEATHER_LOADED = 'WEATHER_LOADED';
 export const WEATHER_FAILED = 'WEATHER_FAILED';
 const API_KEY = '06142144e99a703512af3cb28ba80ca8';
-import {PermissionsAndroid} from 'react-native';
+import {PermissionsAndroid,Platform} from 'react-native';
+
 
 import Geolocation from '@react-native-community/geolocation';
 
@@ -50,11 +51,12 @@ export function getWeatherAsyncAction(currentCity){
 }
 
 async function getWeatherByGps(){
-        const granted = await requestLocationPermission();
-        if(granted){
-            const result = await getLocation();
-            return await fetchWeatherByGps(result.coords.latitude,result.coords.longitude);
-        }
+    const granted = Platform.OS === 'ios' ? true : await requestLocationPermission();
+
+    if(granted){
+        const result = await getLocation();
+        return await fetchWeatherByGps(result.coords.latitude,result.coords.longitude);
+    }
 }
 async function requestLocationPermission(){
     const granted = await PermissionsAndroid.request(
