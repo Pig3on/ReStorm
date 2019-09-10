@@ -60,6 +60,8 @@ async function getWeatherByGps() {
       result.coords.latitude,
       result.coords.longitude,
     );
+  } else {
+    throw Error('Gps permission denied');
   }
 }
 async function requestLocationPermission() {
