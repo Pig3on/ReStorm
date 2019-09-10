@@ -27,9 +27,7 @@ target 'ReStorm' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'RNScreens', :path => '../node_modules/react-native-screens'
 
-  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
   target 'ReStormTests' do
     inherit! :search_paths
